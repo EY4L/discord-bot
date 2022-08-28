@@ -1,8 +1,10 @@
 import os
 
 import discord
+import nest_asyncio
 from dotenv import find_dotenv, load_dotenv
 
+nest_asyncio.apply()
 # Loads the .env file that resides on the same level as the script.
 load_dotenv(find_dotenv())
 
@@ -33,17 +35,17 @@ bot = discord.Client(intents=discord.Intents.default())
 
 
 # EVENT LISTENER FOR WHEN A NEW MESSAGE IS SENT TO A CHANNEL.
-# @bot.event
-# async def on_message(message):
-#     # CHECKS IF THE MESSAGE THAT WAS SENT IS EQUAL TO "HELLO".
-#     if message.content == "hello":
-#         # SENDS BACK A MESSAGE TO THE CHANNEL.
-#         await message.channel.send("hey dirtbag")
+@bot.event
+async def on_message(message):
+    # CHECKS IF THE MESSAGE THAT WAS SENT IS EQUAL TO "HELLO".
+    if message.content == "hello testbot":
+        # SENDS BACK A MESSAGE TO THE CHANNEL.
+        await message.channel.send("Hello, got any Shmeckles?")
 
 
 @bot.event
 async def on_ready():
-    print(f"{bot.user} has connected to Discord!")
+    await print(f"{bot.user} has connected to Discord!")
 
 
 # EXECUTES THE BOT WITH THE SPECIFIED TOKEN. TOKEN HAS BEEN REMOVED AND USED JUST AS AN EXAMPLE.
