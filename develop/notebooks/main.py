@@ -1,43 +1,49 @@
 import os
 
 import discord
-from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
 
 # Loads the .env file that resides on the same level as the script.
-load_dotenv()
+load_dotenv(find_dotenv())
 
-# Grab the API token from the .env file.
-DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+# GetAPI token from .env file
+DISCORD_TOKEN = os.getenv("TOKEN")
 
 # GETS THE CLIENT OBJECT FROM DISCORD.PY. CLIENT IS SYNONYMOUS WITH BOT.
-bot = discord.Client()
+# connects to discord api
+bot = discord.Client(intents=discord.Intents.default())
 
 
-# EVENT LISTENER FOR WHEN THE BOT HAS SWITCHED FROM OFFLINE TO ONLINE.
-@bot.event
-async def on_ready():
-    # CREATES A COUNTER TO KEEP TRACK OF HOW MANY GUILDS / SERVERS THE BOT IS CONNECTED TO.
-    guild_count = 0
+# # EVENT LISTENER FOR WHEN THE BOT HAS SWITCHED FROM OFFLINE TO ONLINE.
+# @bot.event
+# async def on_ready():
+#     # CREATES A COUNTER TO KEEP TRACK OF HOW MANY GUILDS / SERVERS THE BOT IS CONNECTED TO.
+#     guild_count = 0
 
-    # LOOPS THROUGH ALL THE GUILD / SERVERS THAT THE BOT IS ASSOCIATED WITH.
-    for guild in bot.guilds:
-        # PRINT THE SERVER'S ID AND NAME.
-        print(f"- {guild.id} (name: {guild.name})")
+#     # LOOPS THROUGH ALL THE GUILD / SERVERS THAT THE BOT IS ASSOCIATED WITH.
+#     for guild in bot.guilds:
+#         # PRINT THE SERVER'S ID AND NAME.
+#         print(f"- {guild.id} (name: {guild.name})")
 
-        # INCREMENTS THE GUILD COUNTER.
-        guild_count = guild_count + 1
+#         # INCREMENTS THE GUILD COUNTER.
+#         guild_count = guild_count + 1
 
-    # PRINTS HOW MANY GUILDS / SERVERS THE BOT IS IN.
-    print("SampleDiscordBot is in " + str(guild_count) + " guilds.")
+#     # PRINTS HOW MANY GUILDS / SERVERS THE BOT IS IN.
+#     print("SampleDiscordBot is in " + str(guild_count) + " guilds.")
 
 
 # EVENT LISTENER FOR WHEN A NEW MESSAGE IS SENT TO A CHANNEL.
+# @bot.event
+# async def on_message(message):
+#     # CHECKS IF THE MESSAGE THAT WAS SENT IS EQUAL TO "HELLO".
+#     if message.content == "hello":
+#         # SENDS BACK A MESSAGE TO THE CHANNEL.
+#         await message.channel.send("hey dirtbag")
+
+
 @bot.event
-async def on_message(message):
-    # CHECKS IF THE MESSAGE THAT WAS SENT IS EQUAL TO "HELLO".
-    if message.content == "hello":
-        # SENDS BACK A MESSAGE TO THE CHANNEL.
-        await message.channel.send("hey dirtbag")
+async def on_ready():
+    print(f"{bot.user} has connected to Discord!")
 
 
 # EXECUTES THE BOT WITH THE SPECIFIED TOKEN. TOKEN HAS BEEN REMOVED AND USED JUST AS AN EXAMPLE.
