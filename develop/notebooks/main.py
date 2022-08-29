@@ -14,7 +14,8 @@ DISCORD_TOKEN = os.getenv("TOKEN")
 
 # GETS THE CLIENT OBJECT FROM DISCORD.PY. CLIENT IS SYNONYMOUS WITH BOT.
 # connects to discord api
-bot = discord.Client(intents=discord.Intents.default())
+# Intents is the permission type of the bot, ensure it has everything in the developer portal
+bot = discord.Client(intents=discord.Intents.all())
 
 
 # # EVENT LISTENER FOR WHEN THE BOT HAS SWITCHED FROM OFFLINE TO ONLINE.
@@ -59,7 +60,7 @@ async def on_message(message):
 
     if channel == "general":
         if user_message.lower() == "hello" or user_message.lower() == "hi":
-            await message.channel.send(f"Hello {username}")
+            await message.channel.send(f"Hello {username} welcome to ye olde")
             return
         elif user_message.lower() == "bye":
             await message.channel.send(f"Bye {username}")
@@ -77,3 +78,5 @@ async def on_message(message):
 
 # EXECUTES THE BOT WITH THE SPECIFIED TOKEN. TOKEN HAS BEEN REMOVED AND USED JUST AS AN EXAMPLE.
 bot.run(DISCORD_TOKEN)
+
+# TODO: create feature which prints the total time users have been in a channel in discord and print the total time someone was in the chat when they've left
