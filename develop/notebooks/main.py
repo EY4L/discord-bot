@@ -80,3 +80,4 @@ async def on_message(message):
 bot.run(DISCORD_TOKEN)
 
 # TODO: create feature which prints the total time users have been in a channel in discord and print the total time someone was in the chat when they've left
+# %%
