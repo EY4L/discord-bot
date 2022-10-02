@@ -29,9 +29,11 @@ class MyClient(discord.Client):
         if message.author.id == self.user.id:
             return
 
+        # Guessing game
         if message.content.startswith("$guess"):
             await message.channel.send("Guess a number between 1 and 10.")
 
+            # TODO: move function to script
             def is_correct(m):
                 return m.author == message.author and m.content.isdigit()
 
@@ -56,8 +58,21 @@ class MyClient(discord.Client):
             else:
                 await message.channel.send(f"Oops. It is actually {answer}.")
 
+        # 8 Ball question game
         if message.content.startswith("$8ball"):
-            return message.channel.send(eight_ball_answer)
+            await message.channel.send("Ask the 8 Ball your question...")
+
+            try:
+                question = await self.wait_for(
+                    "message",
+                    timeout=15.0,
+                )
+
+            except asyncio.TimeoutError:
+                return await message.channel.send("Sorry, you took too long.")
+
+            if question.content:
+                await message.channel.send(eight_ball_answer)
 
 
 intents = discord.Intents.default()
