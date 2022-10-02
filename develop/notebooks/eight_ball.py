@@ -26,6 +26,8 @@ ANSWERS = [
     "Gods say no.",
     "No one knows.",
     "I don't think so.",
+    "You should go to Ye Olde and think about it.",
+    "Ask Joe, I don't fucking know...",
 ]
 
 
