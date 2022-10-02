@@ -72,7 +72,7 @@ class MyClient(discord.Client):
                 return await message.channel.send("Sorry, you took too long.")
 
             if question.content:
-                await message.channel.send(eight_ball_answer)
+                await message.channel.send(eight_ball_answer())
 
 
 intents = discord.Intents.default()
