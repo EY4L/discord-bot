@@ -95,5 +95,5 @@ class Music(commands.Cog):
             await ctx.send("🛑 Stopped and cleared the queue.")
 
 
-def setup(bot):
-    bot.add_cog(Music(bot))
+async def setup(bot):
+    await bot.add_cog(Music(bot))

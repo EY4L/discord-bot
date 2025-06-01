@@ -1,3 +1,4 @@
+import asyncio
 import os
 
 import discord
@@ -16,7 +17,9 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 async def on_ready():
     print(f"{bot.user.name} is now running.")
 
-# Load all cogs
-bot.load_extension("cogs.music")
+async def main():
+    async with bot:
+        await bot.load_extension("cogs.music")
+        await bot.start(DISCORD_TOKEN)
 
-bot.run(DISCORD_TOKEN)
+asyncio.run(main())
