@@ -1,1 +1,3 @@
 use spotify links
+skip songs with a specific number of seconds (scrubbing)
+loop a song and loop a playlist

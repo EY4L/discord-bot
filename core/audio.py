@@ -17,10 +17,18 @@ def is_url(string: str) -> bool:
     except ValueError:
         return False
 
-def get_audio_source(query: str):
+def get_audio_source(query: str, start_time: int = 0):
     if not is_url(query):
         info = ytdl.extract_info(f"ytsearch:{query}", download=False)['entries'][0]
     else:
         info = ytdl.extract_info(query, download=False)
 
-    return info['title'], discord.FFmpegPCMAudio(info['url'], options='-vn')
+    # Prepare ffmpeg options, including seek start time (-ss)
+    ffmpeg_options = {
+        'before_options': f'-ss {start_time}',
+        'options': '-vn'
+    }
+
+    source = discord.FFmpegPCMAudio(info['url'], **ffmpeg_options)
+
+    return info['title'], source
