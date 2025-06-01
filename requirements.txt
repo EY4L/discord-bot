@@ -1,5 +1,4 @@
 discord.py
 python-dotenv
-ipykernel
 discord.py[voice]
 yt-dlp
